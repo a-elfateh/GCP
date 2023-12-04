@@ -21,7 +21,7 @@ $ gcloud compute networks create privatenet --subnet-mode custom
 ```
 
 ```
-$ gcloud compute networks subnets create privatenet-us --network privatenet --region us-east1 --ranges 10.130.0.0/20
+$ gcloud compute networks subnets create privatenet-us --network privatenet --region us-east1 --range 10.130.0.0/20
 ```
 
 ```
