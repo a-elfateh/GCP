@@ -25,12 +25,21 @@ $ gcloud compute networks subnets create privatenet-us --network privatenet --re
 ```
 
 ```
-$ gcloud compute firewall-rules create privatenet_ssh --network privatenet --action allow --rules tcp:22
+$ gcloud compute firewall-rules create privatenet-ssh --network privatenet --action allow --rules tcp:22
 ```
 
 2- Create a VM with only internal IP and has no external IP (will sit privatly on the Google Cloud network)
 ```
-$ gcloud compute instances create privatenet_vm --machine-type e2-micro --subnet privatenet-us --zone us-east1-d --no-address
+$ gcloud compute instances create privatenet-vm --machine-type e2-micro --subnet privatenet-us --zone us-east1-d --no-address
 ```
 
 **The --no-address option is used to set the vm with no external IP**
+
+3- Will ssh into the machine we just created using the ```--tunnel-through-iap``` option; because the vm has no external IP address
+````
+$ gcloud compute ssh privatenet-vm --zone us-east1-d --tunnel-through-iap
+```
+4- Test the connectivity to google.com
+```
+$ ping google.com
+```
