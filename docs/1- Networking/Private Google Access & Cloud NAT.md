@@ -28,18 +28,32 @@ $ gcloud compute networks subnets create privatenet-us --network privatenet --re
 $ gcloud compute firewall-rules create privatenet-ssh --network privatenet --action allow --rules tcp:22
 ```
 
+
 2- Create a VM with only internal IP and has no external IP (will sit privatly on the Google Cloud network)
 ```
 $ gcloud compute instances create privatenet-vm --machine-type e2-micro --subnet privatenet-us --zone us-east1-d --no-address
 ```
-
 **The --no-address option is used to set the vm with no external IP**
 
-3- Will ssh into the machine we just created using the ```--tunnel-through-iap``` option; because the vm has no external IP address
-````
+
+3- Let's create a bucket to test the connection from the vm we just created to that bucket. **Please make sure that your bucket name is unique**
+```
+gcloud storage buckets create gs://unique-bucket-name 
+```
+
+4- Will ssh into the machine we just created using the ```--tunnel-through-iap``` option; because the vm has no external IP address
+```
 $ gcloud compute ssh privatenet-vm --zone us-east1-d --tunnel-through-iap
 ```
-4- Test the connectivity to google.com
+
+5- Test the connectivity to the bucket you just created by creating a sample.txt file and trying to copy it to the bucket.
 ```
-$ ping google.com
+touch sample.txt && gcloud storage cp sample.txt gs://unique-bucket-name
 ```
+
+6- Open a new cloud shell tab alongside the current one where you are accessing the privatenet-vm. Will now enable Private Google Access on the privatenet-us subnet
+```
+gcloud compute networks subnets update privatenet-us --region us-east1 --enable-private-ip-google-access
+```
+
+7- 
