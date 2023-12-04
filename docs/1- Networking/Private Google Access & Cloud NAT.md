@@ -3,7 +3,6 @@ As a general security best practice in the cloud, utilizng private machines only
 When you decide to use private machines, upon deploying the VM you restrict the vm from using external IP, leaving it only with its internal IP. 
 
 **A question though, How can such VMs communicate with exteranl APIs, Cloud services, or even accessing the internet for updates, patching, configuration...etc?**
-
 Here's where Private Google Access & Cloud NAT comes into play.
 
 # Private Google Access 
