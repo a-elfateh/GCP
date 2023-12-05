@@ -3,7 +3,7 @@ As a general security best practice in the cloud, utilizng private machines only
 When you decide to use private machines, upon deploying the VM you restrict the vm from using external IP, leaving it only with its internal IP. 
 
 **A question though, How can such VMs communicate with exteranl APIs, Cloud services, or even accessing the internet for updates, patching, configuration...etc?**
-Here's where Private Google Access & Cloud NAT comes into play.
+Here's where services like Private Google Access & Cloud NAT comes into play.
 
 # How does Private Google Access Work exactly? 
 You enable Private Google Access on a subnet-by-subnet basis. You should enable Private Google Access to allow VM instances that only have internal IP addresses to reach the external IP addresses of Google APIs and services. For example, if your private VM instance needs to access a Cloud Storage bucket (which we will do in this lab), you need to enable Private Google Access.
