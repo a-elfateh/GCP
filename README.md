@@ -5,6 +5,6 @@ As always, I like to segregate my repos into sub-topics, with each topic contain
 
 ## Topics:
 1. Networking
-   - [Private Google Access & Cloud NAT](https://github.com/a-elfateh/GCP)
+   - [Private Google Access]([https://github.com/a-elfateh/GCP](https://github.com/a-elfateh/GCP/blob/main/docs/1-%20Networking/Private%20Google%20Access.md)https://github.com/a-elfateh/GCP/blob/main/docs/1-%20Networking/Private%20Google%20Access.md)
    - This site was built using [GitHub Pages](https://pages.github.com/).
    - 
