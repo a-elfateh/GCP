@@ -17,21 +17,21 @@ You enable Private Google Access on a subnet-by-subnet basis. You should enable 
 ## Lab Steps:
 1- On GCP, open the cloud shell and create a custom mode VPC, a subnet, and the needed firewall rules to ssh into a VM will be creating later.
 ```
-$ gcloud compute networks create privatenet --subnet-mode custom
+gcloud compute networks create privatenet --subnet-mode custom
 ```
 
 ```
-$ gcloud compute networks subnets create privatenet-us --network privatenet --region us-east1 --range 10.130.0.0/20
+gcloud compute networks subnets create privatenet-us --network privatenet --region us-east1 --range 10.130.0.0/20
 ```
 
 ```
-$ gcloud compute firewall-rules create privatenet-ssh --network privatenet --action allow --rules tcp:22
+gcloud compute firewall-rules create privatenet-ssh --network privatenet --action allow --rules tcp:22
 ```
 
 
 2- Create a VM with only internal IP and has no external IP (will sit privatly on the Google Cloud network)
 ```
-$ gcloud compute instances create privatenet-vm --machine-type e2-micro --subnet privatenet-us --zone us-east1-d --no-address
+gcloud compute instances create privatenet-vm --machine-type e2-micro --subnet privatenet-us --zone us-east1-d --no-address
 ```
 **The --no-address option is used to set the vm with no external IP**
 
@@ -43,17 +43,19 @@ gcloud storage buckets create gs://unique-bucket-name
 
 4- Will ssh into the machine we just created using the ```--tunnel-through-iap``` option; because the vm has no external IP address
 ```
-$ gcloud compute ssh privatenet-vm --zone us-east1-d --tunnel-through-iap
+gcloud compute ssh privatenet-vm --zone us-east1-d --tunnel-through-iap
 ```
 
-5- Test the connectivity to the bucket you just created by creating a sample.txt file and trying to copy it to the bucket.
+5- Test the connectivity to the bucket you just create
 ```
-touch sample.txt && gcloud storage cp sample.txt gs://unique-bucket-name
+gcloud storage ls
 ```
+** This should return nothing, as the vm currently cannot communicate with other services due to the lack of an external IP address**
+
 
 6- Open a new cloud shell tab alongside the current one where you are accessing the privatenet-vm. Will now enable Private Google Access on the privatenet-us subnet
 ```
-gcloud compute networks subnets update privatenet-us --region us-east1 --enable-private-ip-google-access
+gcloud compute networks subnets update privatenet-us --region=us-east1 --enable-private-ip-google-access
 ```
 
 7- 
