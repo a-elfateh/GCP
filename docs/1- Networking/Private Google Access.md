@@ -1,11 +1,11 @@
-# Private Google Access & Cloud NAT
+# Private Google Access
 As a general security best practice in the cloud, utilizng private machines only wherever possible.
 When you decide to use private machines, upon deploying the VM you restrict the vm from using external IP, leaving it only with its internal IP. 
 
 **A question though, How can such VMs communicate with exteranl APIs, Cloud services, or even accessing the internet for updates, patching, configuration...etc?**
 Here's where Private Google Access & Cloud NAT comes into play.
 
-# Private Google Access 
+# How does Private Google Access Work exactly? 
 You enable Private Google Access on a subnet-by-subnet basis. You should enable Private Google Access to allow VM instances that only have internal IP addresses to reach the external IP addresses of Google APIs and services. For example, if your private VM instance needs to access a Cloud Storage bucket (which we will do in this lab), you need to enable Private Google Access.
 
 ## Lab Objectives
@@ -38,15 +38,15 @@ gcloud compute instances create privatenet-vm --machine-type e2-micro --subnet p
 
 3- Let's create a bucket to test the connection from the vm we just created to that bucket. **Please make sure that your bucket name is unique**
 ```
-gcloud storage buckets create gs://unique-bucket-name 
+gsutil mb gs://unique-bucket-name 
 ```
 
-4- Will ssh into the machine we just created using the ```--tunnel-through-iap``` option; because the vm has no external IP address
+4- Will ssh into the machine we just created utilizing the tunnel-through-iap API, where VM's that have no external IP address can be ssh'ed into.
 ```
 gcloud compute ssh privatenet-vm --zone us-east1-d --tunnel-through-iap
 ```
 
-5- Test the connectivity to the bucket you just create
+5- Test the connectivity to the bucket you just created
 ```
 gcloud storage ls
 ```
@@ -58,4 +58,13 @@ gcloud storage ls
 gcloud compute networks subnets update privatenet-us --region=us-east1 --enable-private-ip-google-access
 ```
 
-7- 
+7- Will return now to the first window to check the effect of Private Google Access on the subnet
+```
+gsutil ls
+```
+Let's copy some files from a public bucket to our VM
+```
+gsutil cp gs://cloud-training/gcpnet/private/access.svg .
+```
+
+This shows you the power of this feature available on Google Cloud, which by you can use your VMs behind Google's global private network, prohibiting the VM from accessing the internet for security best practices, and enable this feature whenever you need it to access other Google Cloud services and Google APIs.
