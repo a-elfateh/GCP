@@ -1,7 +1,7 @@
 # GCP
 A repo containting mini projects and guided tutorials on the Google Cloud Platform
 
-I segregated this repo into sub-topics, with each topic containing related services and documents.
+I segregated this repo into sub-topics, with each topic containing related services and documents. Will start small and then grow 😁
 
 ## Topics:
 1. Networking
