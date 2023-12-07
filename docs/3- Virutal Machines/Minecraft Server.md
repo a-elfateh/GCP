@@ -93,6 +93,7 @@ sudo screen -S mcs java -Xmx1024M -Xms1024M -jar server.jar nogui
 
 <img width="572" alt="Screenshot 2023-12-07 at 8 11 25 PM" src="https://github.com/a-elfateh/GCP/assets/61758821/e1892bb0-47ef-4fa1-b543-9d57f4673bbf">
 
+
 ```
 gcloud compute instances add-metadata mine-server --zone=us-west1-c --metadata=startup-script-url=https://storage.googleapis.com/cloud-training/archinfra/mcserver/startup.sh
 ```
