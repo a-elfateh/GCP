@@ -69,8 +69,30 @@ sudo wget https://launcher.mojang.com/v1/objects/d0d0fe2b1dc6ab4c65554cb73427087
 sudo java -Xmx1024M -Xms1024M -jar server.jar nogui
 ```
 
+**Notice the error you got, this is because we need to accept the terms of the End User Licensing Agreement (EULA). We will edit the eula file. Change the** ```eula=false to eula=true```
+
 ```
 sudo nano eula.txt
 ```
 
-** edit the **
+```
+sudo java -Xmx1024M -Xms1024M -jar server.jar nogui
+```
+
+Now the server is up and running. One issue though, is that our gaming session is tied to the current screen you're seeing now. If this screen is list for any reason, our session will be lost with it.
+
+```
+sudo apt-get install -y screen
+```
+
+```
+sudo screen -S mcs java -Xmx1024M -Xms1024M -jar server.jar nogui
+```
+
+**Press press Ctrl+A, Ctrl+D to detach from the screen. To reattach the terminal, run the following command:** ```sudo screen -r mcs```
+
+**Let's verify our gaming server. Go to this website and enter the extrnal IP address of your minecraft server here: https://mcsrvstat.us, If all went well, you will see something like this**
+
+<img width="572" alt="Screenshot 2023-12-07 at 8 11 25 PM" src="https://github.com/a-elfateh/GCP/assets/61758821/e1892bb0-47ef-4fa1-b543-9d57f4673bbf">
+
+
