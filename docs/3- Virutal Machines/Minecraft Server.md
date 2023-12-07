@@ -11,22 +11,27 @@ Finally, as most administrative roles require their personnel to automate some s
 ## Minecraft game server 🛠️🧱💎
 Let's starting building now 🛠️. Fire up the cloud shell on the top left corner of the cloud console.
 
+1- First, create the gaming disk that will hold the minecraft server. I will choose us-west1
 ```
 gcloud compute disks create mine-disk --type pd-ssd --size 50 --zone us-west1-c
 ```
 
+2- Next, reserve an IP address which we will attach as an extranl IP for our minecraft server
 ```
 gcloud compute addresses create mine-address --region us-west1
 ```
 
+3- We will also need to enable traffic through port 25565, which is the port the game uses for enabling traffic to and from the server.
 ```
 gcloud compute firewall-rules create mine-fw --action allow --source-ranges 0.0.0.0/0 --rules tcp:25565
 ```
 
+4- Now we will create the gaming server, making sure to add all of what we created earlier. In the options of the follwing command, make sure to attach the gaming disk, the reserved ip address, and add the firewall rule we created by tagging the firewall rule name to the instance.
 ```
 gcloud compute instances create mine-server --zone us-west1-c --machine-type e2-medium --disk=name=mine-disk,mode=rw --address mine-address --tags mine-fw
 ```
 
+5- Let's ssh to our VM now.
 ```
 gcloud compute ssh mine-server --zone us-west1-c
 ```
