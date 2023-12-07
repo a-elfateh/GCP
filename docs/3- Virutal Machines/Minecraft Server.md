@@ -11,3 +11,66 @@ Finally, as most administrative roles require their personnel to automate some s
 
 
 ## Minecraft game server 🛠️🧱💎
+Let's starting building now 🛠️. Fire up the cloud shell on the top left corner of the cloud console.
+
+```
+gcloud compute disks create mine-disk --type pd-ssd --size 50 --zone us-west1-c
+```
+
+```
+gcloud compute addresses create mine-address --region us-west1
+```
+
+```
+gcloud compute firewall-rules create mine-fw --action allow --source-ranges 0.0.0.0/0 --rules tcp:25565
+```
+
+```
+gcloud compute instances create mine-server --zone us-west1-c --machine-type e2-medium --disk=name=mine-disk,mode=rw --address mine-address --tags mine-fw
+```
+
+```
+gcloud compute ssh mine-server --zone us-west1-c
+```
+
+```
+sudo mkdir -p /home/minecraft
+```
+
+```
+sudo mkfs.ext4 -F -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/disk/by-id/google-persistent-disk-1
+```
+
+```
+sudo mount -o discard,defaults /dev/disk/by-id/google-persistent-disk-1 /home/minecraft
+```
+
+```
+df -h /home/minecraft
+```
+
+```
+sudo apt-get update
+```
+
+```
+sudo apt-get install -y default-jre-headless
+```
+
+```
+cd /home/minecraft && sudo apt-get install wget
+```
+
+```
+sudo wget https://launcher.mojang.com/v1/objects/d0d0fe2b1dc6ab4c65554cb734270872b72dadd6/server.jar
+```
+
+```
+sudo java -Xmx1024M -Xms1024M -jar server.jar nogui
+```
+
+```
+sudo nano eula.txt
+```
+
+** edit the **
