@@ -65,13 +65,20 @@ sudo apt-get install -y default-jre-headless
 ```
 
 ```
-cd /home/minecraft && sudo apt-get install wget
+sudo apt-get install wget
+```
+
+10- Go to the /home/minecraft directory where we mounted the disk that will host the game, and download the files needed the gaming server jar file.
+
+```
+cd /home/minecraft && 
 ```
 
 ```
 sudo wget https://launcher.mojang.com/v1/objects/d0d0fe2b1dc6ab4c65554cb734270872b72dadd6/server.jar
 ```
 
+11- Run the gamming server.
 ```
 sudo java -Xmx1024M -Xms1024M -jar server.jar nogui
 ```
@@ -82,16 +89,19 @@ sudo java -Xmx1024M -Xms1024M -jar server.jar nogui
 sudo nano eula.txt
 ```
 
+**Now run the command again**
+
 ```
 sudo java -Xmx1024M -Xms1024M -jar server.jar nogui
 ```
 
-Now the server is up and running. One issue though, is that our gaming session is tied to the current screen you're seeing now. If this screen is list for any reason, our session will be lost with it.
+The server is up and running. One issue though, is that our gaming session is tied to the current screen you're seeing now. If this screen is list for any reason, our session will be lost with it. We will fix this by installing  **screen** package.
 
 ```
 sudo apt-get install -y screen
 ```
 
+12- Run the following command to start the Minecraft server behind a screen virtual terminal.
 ```
 sudo screen -S mcs java -Xmx1024M -Xms1024M -jar server.jar nogui
 ```
@@ -103,6 +113,9 @@ sudo screen -S mcs java -Xmx1024M -Xms1024M -jar server.jar nogui
 <img width="572" alt="Screenshot 2023-12-07 at 8 11 25 PM" src="https://github.com/a-elfateh/GCP/assets/61758821/e1892bb0-47ef-4fa1-b543-9d57f4673bbf">
 
 
+# Server Maintenance
+Instead of following the manual process to mount the persistent disk and launch the server application in a screen, you can use metadata scripts to create a startup script and a shutdown script to do this for you.
+
 ```
 gcloud compute instances add-metadata mine-server --zone=us-west1-c --metadata=startup-script-url=https://storage.googleapis.com/cloud-training/archinfra/mcserver/startup.sh
 ```
@@ -110,3 +123,5 @@ gcloud compute instances add-metadata mine-server --zone=us-west1-c --metadata=s
 ```
 gcloud compute instances add-metadata mine-server --zone=us-west1-c --metadata=shutdown-script-url=https://storage.googleapis.com/cloud-training/archinfra/mcserver/shutdown.sh
 ```
+
+**The following scripts won't run unless the server is stopped and started again. Try stopping the machine and starting it once again, give it some time and check the status of the server through the https://mcsrvstat.us website**
