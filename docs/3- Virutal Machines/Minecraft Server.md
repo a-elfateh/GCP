@@ -36,10 +36,12 @@ gcloud compute instances create mine-server --zone us-west1-c --machine-type e2-
 gcloud compute ssh mine-server --zone us-west1-c
 ```
 
+6- We will create a directory to attach to it the disk we prepared
 ```
 sudo mkdir -p /home/minecraft
 ```
 
+7- Run the following commands to format and prepare the disk
 ```
 sudo mkfs.ext4 -F -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/disk/by-id/google-persistent-disk-1
 ```
@@ -48,10 +50,12 @@ sudo mkfs.ext4 -F -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/disk/by
 sudo mount -o discard,defaults /dev/disk/by-id/google-persistent-disk-1 /home/minecraft
 ```
 
+8- Run this command to check if everything went well, and that the disk has been mounted in the /home/minecraft directory
 ```
 df -h /home/minecraft
 ```
 
+9- Now we will install the needed dependencies to run our Minecraft server
 ```
 sudo apt-get update
 ```
