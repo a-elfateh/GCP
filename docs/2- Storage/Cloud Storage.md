@@ -57,7 +57,7 @@ nano .boto
 
 ```
 Before:
-# encryption_key=
+#encryption_key=
 
 After:
 encryption_key=tmxElCaabWvJqR7uXEWQF39DhWTcDvChzuCmpHe6sb0=
@@ -75,7 +75,7 @@ nano .boto
 
 ```
 Before:
-# decryption_key1=
+#decryption_key1=
 
 After:
 decryption_key1=UUyZE5Fmj+2M3tw2LeEX4vwVoQ0/JmxSvii6gzbeToo=
