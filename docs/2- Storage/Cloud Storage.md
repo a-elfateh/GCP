@@ -90,22 +90,77 @@ gsutil cp sample3.txt gs://$bucket
 
 **Examine the files in the Cloud Storage Console. Click you bucket name. You will get a list of all current sample.txt files. Move your cursor on top any of the 3 files, and hover to the right until reaching the "Encryption" column. You will see that the first file we uploaded before setting CSEK is "Google-managed", and the other two are " Customer-supplied"**
 
+# Lifecycle Management
+
+```
+gsutil lifecycle get gs://$bucket
 ```
 
 ```
-
+nano life.json
 ```
 
 ```
+{
+  "rule":
+  [
+    {
+      "action": {"type": "Delete"},
+      "condition": {"age": 31}
+    }
+  ]
+}
+```
 
+**Save the file using Ctrl+O and then CTRL+X to exit**
+
+```
+gsutil lifecycle set life.json gs://$bucket
 ```
 
 ```
+gsutil lifecycle get gs://$bucket
+```
 
+# Object Versioning
+
+```
+gsutil versioning get gs://$bucket
 ```
 
 ```
-
+gsutil versioning set on gs://$bucket
 ```
 
 ```
+gsutil versioning get gs://$bucket
+```
+
+**Add another line to the sample.txt file so we can test versioning when re-uploading the file**
+
+```
+echo "Welcome to file Versioning" >> sample.txt
+```
+
+```
+gsutil cp sample.txt gs://$bucket
+```
+
+```
+rm sample.txt
+```
+
+```
+gcloud storage ls -a gs://$bucket
+```
+
+**You will see that the sample.txt file has 2 versions now on top of each other. The second one is the new version of the file we just uploaded. Let's copy that one to our terminal and checkt it's content. Make sure in the next command to take the full name of the file to get the new version we just uploaded**
+
+```
+gsutil cp gs://$bucket/sample.txt#1702200588379369 .
+```
+
+```
+cat sample.txt
+```
+
