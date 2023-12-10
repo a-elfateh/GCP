@@ -62,6 +62,8 @@ Before:
 After:
 encryption_key=tmxElCaabWvJqR7uXEWQF39DhWTcDvChzuCmpHe6sb0=
 ```
+
+```
 python3 -c 'import base64; import os; print(base64.encodebytes(os.urandom(32)))'
 ```
 
@@ -82,13 +84,11 @@ decryption_key1=UUyZE5Fmj+2M3tw2LeEX4vwVoQ0/JmxSvii6gzbeToo=
 ```
 
 ```
-
-```
-
-```
 gsutil cp sample2.txt gs://$bucket
 gsutil cp sample3.txt gs://$bucket
 ```
+
+**Examine the files in the Cloud Storage Console. Click you bucket name. You will get a list of all current sample.txt files. Move your cursor on top any of the 3 files, and hover to the right until reaching the "Encryption" column. You will see that the first file we uploaded before setting CSEK is "Google-managed", and the other two are " Customer-supplied"**
 
 ```
 
