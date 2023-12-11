@@ -116,12 +116,16 @@ sudo screen -S mcs java -Xmx1024M -Xms1024M -jar server.jar nogui
 # Server Maintenance
 Instead of following the manual process to mount the persistent disk and launch the server application in a screen, you can use metadata scripts to create a startup script and a shutdown script to do this for you.
 
+1- Download the scripts to your machine
 ```
-gcloud compute instances add-metadata mine-server --zone=us-west1-c --metadata=startup-script-url=https://storage.googleapis.com/cloud-training/archinfra/mcserver/startup.sh
+wget https://github.com/a-elfateh/GCP/blob/main/resources/mcserver_startup.sh
+wget https://github.com/a-elfateh/GCP/blob/main/resources/mcserver_shutdown.sh
 ```
 
+2- Apply the scripts to your Minecraft server 
+
 ```
-gcloud compute instances add-metadata mine-server --zone=us-west1-c --metadata=shutdown-script-url=https://storage.googleapis.com/cloud-training/archinfra/mcserver/shutdown.sh
+gcloud compute instances add-metadata mine-server --zone=us-west1-c --metadata=shutdown-script=mcserver_shutdown.sh,startup-script=mcserver_startup.sh
 ```
 
 **The following scripts won't run unless the server is stopped and started again. Try stopping the machine and starting it once again, give it some time and check the status of the server through the https://mcsrvstat.us website**
