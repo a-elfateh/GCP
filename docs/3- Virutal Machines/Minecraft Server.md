@@ -3,7 +3,7 @@ In this tutioral, we will get to do get oud hands dirty with some of Google Clou
 # What's the plan exactly?
 We will customize a virtual machine instance by installing base software, which's a headless Java runtime environment and application software, specifically, a **Minecraft game server 🛠️🧱💎** . Will customize the VM by preparing and attaching a high-speed SSD to match the game server's performance. 
 
-We will also need a reserved a static external IP address; so we don't get bothered each time accessing the game by Google Cloud's ephermeral pool. We will take the IP and check the availability of the the gaming server on an outsource website.
+We will also need a reserved a static external IP address; so we don't get bothered by Google Cloud's ephermeral pool each time accessing the game. We will take the IP and check the availability of the the gaming server on an outsource website.
 
 Finally, as most administrative roles require their personnel to automate some startup and shutdown tasks, we will take advantage of startup/shutdown scripts.
 
