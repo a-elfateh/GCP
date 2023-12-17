@@ -27,9 +27,9 @@ Let's look at Cloud Storage management in the Cloud Shell. Will be createing a C
 gcloud storage buckets create gs://BucketName -l us-west1 --no-uniform-bucket-level-access --no-public-access-prevention
 ```
 
-2- Save your bucket name in a shell variable called "YOUR_BUCKET_NAME"
+2- Save your bucket name in a shell variable called "bucket"
 ```
-export bucket=YOUR_BUCKET_NAME
+export bucket=YOUR_BUCKET_NAM
 ```
 
 3- Create a sample file for the next storage operations
@@ -48,10 +48,32 @@ cp sample.txt sample3.txt
 gcloud storage cp sample.txt gs://$bucket
 ```
 
-6- List all the files in the 
+6- List all the files in the bucket
+```
+gsutil ls gs://$bucket
+```
 
+7- You can also delete the file:
+```
+gsutil rm gs://$bucket/sample.txt
+```
 
- 
+8- check if the file has been deleted
+```
+gsutil ls gs://$bucket
+```
+
+9- Now re-upload the file as we will be needing it in the next section
+```
+gsutil cp sample.txt gs://$bucket
+```
+
+# Access Control List
+- We can use IAM for the project to control which individual user or service account can see the bucket, list the objects in the bucket, view the names of the objects in the bucket, or create new buckets. For most purposes, IAM is sufficient, and roles are inherited from project to bucket to object.
+- Access control lists or ACLs offer finer control.
+- For even more detailed control, signed URLs provide a cryptographic key that gives time-limited access to a bucket or object.
+- Finally, a signed policy document further refines the control by determining what kind of file can be uploaded by someone with a signed URL. Let’s take a closer look at ACLs and signed URLs.
+
 ```
 gsutil acl get gs://$bucket/sample.txt
 ```
