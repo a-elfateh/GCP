@@ -12,8 +12,11 @@ Some like to think of Cloud Storage as files in a file system but it’s not rea
 
 # When should I use Cloud Storage? 
 1- When exabyte Scalablity is needed
+
 2- When time to the first byte should be in millisecondes
+
 3- High availability is a constrain
+
 4- Useful for developing application; as it has a single API across all of it's storage classes
 
 # Bucket Management
