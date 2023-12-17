@@ -1,24 +1,54 @@
+# Cloud Storage
+
+Cloud Storage is Google Cloud’s object storage service, and it's main feature is its worldwide availability of storing and retreving data at any time.
+
+Here is some of Cloud Storage Use Cases:
+- Website content
+- Storing data for archiving and disaster recovery
+- Distributing large data objects to users via direct download
+
+# How does Cloud Storage actually works?:
+Some like to think of Cloud Storage as files in a file system but it’s not really a file system. Instead, Cloud Storage is a collection of buckets that you place objects into. You can create directories, so to speak, but really a directory is just another object that points to different objects in the bucket. You’re not going to easily be able to index all of these files like you would in a file system. You just have a specific URL to access objects
+
+# When should I use Cloud Storage? 
+1- When exabyte Scalablity is needed
+2- When time to the first byte should be in millisecondes
+3- High availability is a constrain
+4- Useful for developing application; as it has a single API across all of it's storage classes
+
+# Bucket Management
+Let's look at Cloud Storage management in the Cloud Shell. Will be createing a Cloud Bucket and do some of it's basic operations on to it.
+
+1- Let's first create a regional bucket in the us-west1 region
 ```
-gcloud storage buckets create gs://polonolo -l us-west1 --no-uniform-bucket-level-access --no-public-access-prevention
+gcloud storage buckets create gs://BucketName -l us-west1 --no-uniform-bucket-level-access --no-public-access-prevention
 ```
 
+2- Save your bucket name in a shell variable called "YOUR_BUCKET_NAME"
 ```
 export bucket=YOUR_BUCKET_NAME
 ```
 
+3- Create a sample file for the next storage operations
 ```
 echo "Hello Cloud Storage" > sample.txt
 ```
 
+4- Create some extra copies of the file, will be needing them later.
 ```
 cp sample.txt sample2.txt
 cp sample.txt sample3.txt
 ```
 
+5- Now copy your sample file to the cloud bucket
 ```
 gcloud storage cp sample.txt gs://$bucket
 ```
 
+6- List all the files in the 
+
+
+ 
 ```
 gsutil acl get gs://$bucket/sample.txt
 ```
