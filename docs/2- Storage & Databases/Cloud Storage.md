@@ -157,14 +157,12 @@ gsutil cp sample3.txt gs://$bucket
 
 To support common use cases like setting a Time to Live for objects, archiving older versions of objects, or "downgrading" storage classes of objects to help manage costs, Cloud Storage offers Object Lifecycle Management. You can assign a lifecycle management configuration to a bucket. The configuration is a set of rules that apply to all the objects in the bucket. So when an object meets the criteria of one of the rules, Cloud Storage automatically performs a specified action on the object.
 
+1- Let's check if any configuration is set on our bucket
 ```
 gsutil lifecycle get gs://$bucket
 ```
 
-```
-nano life.json
-```
-
+2- Create a lifecycle management file, copy the below text and paste it in the ```life.json``` file 
 ```
 {
   "rule":
@@ -177,26 +175,38 @@ nano life.json
 }
 ```
 
-**Save the file using Ctrl+O and then CTRL+X to exit**
+```
+nano life.json
+```
 
+**Paste the code, save the file using Ctrl+O ,and then CTRL+X to exit**
+
+3- Apply the lifecycle policy using this command
 ```
 gsutil lifecycle set life.json gs://$bucket
 ```
 
+4- Now run the get command again to check the lifecycle policy on your bucket
 ```
 gsutil lifecycle get gs://$bucket
 ```
 
 # Object Versioning
+In Cloud Storage, objects are immutable, which means that an uploaded object cannot change throughout its storage lifetime. To support the retrieval of objects that are deleted or overwritten, Cloud Storage offers the Object Versioning feature. 
 
+Object Versioning can be enabled for a bucket. Once enabled, Cloud Storage creates an archived version of an object each time the live version of the object is overwritten or deleted. The archived version retains the name of the object but is uniquely identified by a generation number which you'll get to see.
+
+1- Run the get command to view the current versioning policy 
 ```
 gsutil versioning get gs://$bucket
 ```
 
+2- Enable versioning on your bucket 
 ```
 gsutil versioning set on gs://$bucket
 ```
 
+3- Re-run the get command and examine the output
 ```
 gsutil versioning get gs://$bucket
 ```
@@ -204,17 +214,15 @@ gsutil versioning get gs://$bucket
 **Add another line to the sample.txt file so we can test versioning when re-uploading the file**
 
 ```
-echo "Welcome to file Versioning" >> sample.txt
+echo "Welcome to file Versioning" >> sample.txt && gsutil cp sample.txt gs://$bucket
 ```
 
-```
-gsutil cp sample.txt gs://$bucket
-```
-
+4- Delete the currne local ```sample.txt``` from your cloud shell environment.
 ```
 rm sample.txt
 ```
 
+5- Now do a detailed listing on your bucket to view all objects and any versions if available.
 ```
 gcloud storage ls -a gs://$bucket
 ```
@@ -225,6 +233,7 @@ gcloud storage ls -a gs://$bucket
 gsutil cp gs://$bucket/sample.txt#1702200588379369 .
 ```
 
+6- Check the content of your local ```sample.txt``` file you just copied from your bucket to guarantee your work.
 ```
 cat sample.txt
 ```
