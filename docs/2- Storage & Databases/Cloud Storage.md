@@ -71,8 +71,9 @@ gsutil cp sample.txt gs://$bucket
 # Access Control List
 - We can use IAM for the project to control which individual user or service account can see the bucket, list the objects in the bucket, view the names of the objects in the bucket, or create new buckets. For most purposes, IAM is sufficient, and roles are inherited from project to bucket to object.
 - Access control lists or ACLs offer finer control.
-- For even more detailed control, signed URLs provide a cryptographic key that gives time-limited access to a bucket or object.
-- Finally, a signed policy document further refines the control by determining what kind of file can be uploaded by someone with a signed URL. Let’s take a closer look at ACLs and signed URLs.
+- An ACL is a mechanism you can use to define who has access to your buckets and objects, as well as what level of access they have. The maximum number of ACL entries you can create for a bucket or object is 100. Each ACL consists of one or more entries, and these entries consist of two pieces of information:
+  - A scope, which defines who can perform the specified actions (for example, a specific user or group of users).
+  - And a permission, which defines what actions can be performed (for example, read or write).
 
 ```
 gsutil acl get gs://$bucket/sample.txt
