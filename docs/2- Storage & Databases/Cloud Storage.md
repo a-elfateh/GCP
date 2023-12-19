@@ -68,25 +68,29 @@ gsutil ls gs://$bucket
 gsutil cp sample.txt gs://$bucket
 ```
 
-# Access Control List
+# Access Control List (ACL)
 - We can use IAM for the project to control which individual user or service account can see the bucket, list the objects in the bucket, view the names of the objects in the bucket, or create new buckets. For most purposes, IAM is sufficient, and roles are inherited from project to bucket to object.
 - Access control lists or ACLs offer finer control.
 - An ACL is a mechanism you can use to define who has access to your buckets and objects, as well as what level of access they have. The maximum number of ACL entries you can create for a bucket or object is 100. Each ACL consists of one or more entries, and these entries consist of two pieces of information:
   - A scope, which defines who can perform the specified actions (for example, a specific user or group of users).
   - And a permission, which defines what actions can be performed (for example, read or write).
 
+1- Let's get the acl of our sample.txt file
 ```
 gsutil acl get gs://$bucket/sample.txt
 ```
 
+2- You can make a certain file in your bucket private
 ```
 gsutil acl set private gs://$bucket/sample.txt
 ```
 
+3- Now run the get command again and check the resulted output
 ```
 gsutil acl get gs://$bucket/sample.txt
 ```
 
+4- You can also make a file accessible for everyone on the internet through the "AllUsers" scope
 ```
 gsutil acl ch -u AllUsers:R gs://$bucket/sample.txt
 ```
@@ -94,22 +98,22 @@ gsutil acl ch -u AllUsers:R gs://$bucket/sample.txt
 **Examine the file in the Cloud Console on In the Cloud Console by accessing the Navigation Menu, click Cloud Storage > Buckets. Click you bucket name and then your object. Scroll down until seeing Public Url. Copy the URL and paste it in your browser**
 
 # Customer-supplied encryption keys (CSEK)
+An additional layer of security on top of the Google-Manage Encryption Keys. You can provide your own AES-256 encryption key, encoded in standard Base64. This key is known as a customer-supplied encryption key.
 
+1- Let's first generate an encryption key, that Cloud Storage will use for encrypting files
 ```
 python3 -c 'import base64; import os; print(base64.encodebytes(os.urandom(32)))'
 ```
 
 **Copy the value of the generated key excluding b' and \n' from the command output. Key should be in form of tmxElCaabWvJqR7uXEWQF39DhWTcDvChzuCmpHe6sb0=**
 
+2- Generate the configuration file that cloud storage uses and use the ```nano``` editor to edit the file
 ```
 gsutil config -n
-```
-
-```
 nano .boto
 ```
 
-**Locate the line with "#encryption_key="**
+**Locate the line with "#encryption_key=" the file before editing it, and after editing it should look like this**
 
 ```
 Before:
@@ -119,6 +123,8 @@ After:
 encryption_key=tmxElCaabWvJqR7uXEWQF39DhWTcDvChzuCmpHe6sb0=
 ```
 
+3- Now let's redo the same steps, but for a decryption key.
+
 ```
 python3 -c 'import base64; import os; print(base64.encodebytes(os.urandom(32)))'
 ```
@@ -129,7 +135,7 @@ python3 -c 'import base64; import os; print(base64.encodebytes(os.urandom(32)))'
 nano .boto
 ```
 
-**Locate the line with "decryption_key1="**
+**Locate the line with "decryption_key1=", the file before editing it, and after editing it should look like this**
 
 ```
 Before:
@@ -139,6 +145,7 @@ After:
 decryption_key1=UUyZE5Fmj+2M3tw2LeEX4vwVoQ0/JmxSvii6gzbeToo=
 ```
 
+4- Now let's test our keys, upload the 2 versions we cerated earlier to Cloud Storage 
 ```
 gsutil cp sample2.txt gs://$bucket
 gsutil cp sample3.txt gs://$bucket
@@ -147,6 +154,8 @@ gsutil cp sample3.txt gs://$bucket
 **Examine the files in the Cloud Storage Console. Click you bucket name. You will get a list of all current sample.txt files. Move your cursor on top any of the 3 files, and hover to the right until reaching the "Encryption" column. You will see that the first file we uploaded before setting CSEK is "Google-managed", and the other two are " Customer-supplied"**
 
 # Lifecycle Management
+
+To support common use cases like setting a Time to Live for objects, archiving older versions of objects, or "downgrading" storage classes of objects to help manage costs, Cloud Storage offers Object Lifecycle Management. You can assign a lifecycle management configuration to a bucket. The configuration is a set of rules that apply to all the objects in the bucket. So when an object meets the criteria of one of the rules, Cloud Storage automatically performs a specified action on the object.
 
 ```
 gsutil lifecycle get gs://$bucket
