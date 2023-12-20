@@ -1,3 +1,4 @@
+
 Account ID,Line Item,Start Time,End Time,Project,Measurement1,Measurement1 Total Consumption,Measurement1 Units,Cost,Currency,Project Number,Project ID,Project Name,Project Labels,Description
 000000-000000-000000,com.google.cloud/services/cloud-sql/DiskSpaceGb,2016-12-12T00:00:00-08:00,2016-12-13T00:00:00-08:00,449712193911,com.google.cloud/services/cloud-sql/DiskSpaceGb,3865470566400,byte-seconds,0.000322,USD,449712193911,learngcp-1,learngcp-1,,Disk usage
 000000-000000-000001,com.google.cloud/services/cloud-sql/IpAddress,2016-12-12T00:00:00-08:00,2016-12-13T00:00:00-08:00,449712193911,com.google.cloud/services/cloud-sql/IpAddress,3600,seconds,0.01,USD,449712193911,learngcp-1,learngcp-1,,IP address idling - hour
