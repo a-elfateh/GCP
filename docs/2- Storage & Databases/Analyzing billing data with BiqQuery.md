@@ -30,7 +30,7 @@ wget https://github.com/a-elfateh/GCP/blob/main/resources/export-billing-example
 3- Create a table in the "imported_billing_data" dataset called "sampleinfotable" using the csv you just pulled
 ```
 bq load \
-    --skip_leading_rows=1\
+    --skip_leading_rows=1 \
     --autodetect \
     --source_format=CSV \
     imported_billing_data.sampleinfotable \
