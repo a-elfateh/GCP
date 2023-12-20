@@ -53,7 +53,7 @@ bq show --format=prettyjson :imported_billing_data.sampleinfotable | grep numRow
 
 **Moving forward is the query part, you have 2 methods, the ```bq shell``` in the cloud shell (I really don't recommend this one; as database queries in shells are not well presented, especially if the number of columns is big which is the case here). The second way is the BigQuery console which is a beautiful interface which we will use moving forward.**
 
-7- Let's try on query in the shell environement, enter the BigQuery shell
+7- Let's try to query in the shell environement, enter the BigQuery shell
 ```
 bq shell
 ```
@@ -63,4 +63,3 @@ bq shell
 SELECT * FROM imported_billing_data.sampleinfotable WHERE Cost = 0
 ```
 **Switching to the BigQuery console**
-
