@@ -7,7 +7,7 @@ Here is some of Cloud Storage Use Cases:
 - Storing data for archiving and disaster recovery
 - Distributing large data objects to users via direct download
 
-# How does Cloud Storage actually works?:
+# How does Cloud Storage actually works?
 Some like to think of Cloud Storage as files in a file system but it’s not really a file system. Instead, Cloud Storage is a collection of buckets that you place objects into. You can create directories, so to speak, but really a directory is just another object that points to different objects in the bucket. You’re not going to easily be able to index all of these files like you would in a file system. You just have a specific URL to access objects
 
 # When should I use Cloud Storage? 
