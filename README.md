@@ -9,4 +9,4 @@ I segregated this repo into sub-topics, with each topic containing related servi
 2. Virtual Machines
    - [Minecraft Server](https://github.com/a-elfateh/GCP/blob/main/docs/3-%20Virutal%20Machines/Minecraft%20Server.md)
 3. Storage & Databases
-   - [Operations on CLoud Storage](a-elfateh/docs/2- Storage & Databases/Cloud Storage.md)
+   - [Operations on CLoud Storage](/docs/2- Storage & Databases/Cloud Storage.md)
