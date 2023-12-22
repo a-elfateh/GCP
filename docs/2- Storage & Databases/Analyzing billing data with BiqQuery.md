@@ -1,14 +1,12 @@
 # Analyzing billing data with BigQuery
-Google Cloud has made it really easy for you to analyze your expenditure by exporting your billing data through a CSV file, and the second part that Google has eased for their customers is that you can load all of this data in a matter of single clicks or ```gcloud``` commands. 
+Google Cloud has made it really easy to analyze your expenditure by exporting your billing data and loading it for analysis on BigQuery, in a matter of single console clicks or ```gcloud``` commands. 
 
-BigQuery is a great choice for analyzing your billing data where you can run your queries against your data. Having this data in BigQuery also makes it much easier to integrate with other tools, like Looker or Data Studio for visualization.
+BigQuery is a great choice for analyzing your billing data where you can run your queries. The data exported from your billing account are hourly rates of the services under that billing account. Having this data in BigQuery also makes it much easier to integrate with other tools, like Looker or Data Studio for visualization.
 
-The data exported from your billing account are hourly rates of the services under that billing account. 
+This analysis helps in tracking and understanding how your resources contribute to your entire expenditure across all of your projects. It helps in ensuring that your costs are being spent efficiently and to plan well for future costs.
 
-This analysis helps in tracking and understanding how are your resources contribute to your enitre spenditure across all of your projects. It helps in ensuring that your costs are being spent efficently and to plan well for future costs.
-
-# Someone might wonder: Why use BigQuery for this task?
-A valid question; as there are other SQL alternatives such as running an SQL virtual machine, or using Cloud SQL. BigQuery is suited for this kind of work. It's build for large scaled data-sets that are rapidly growing (and monthly billing consumption is diffently that). You can also integrate BigQuery with Looker to have your billing data in a visualized manner, or integrate it with other machine learining services for future insights.
+# Someone might wonder, why use BigQuery for this task specifically?
+A valid question; as there are other SQL alternatives such as running an SQL virtual machine, or using Cloud SQL. BigQuery is suited for this kind of work. It's build for large scaled data-sets that are rapidly growing (and a monthly cloud billing consumption is diffently so). You can also integrate BigQuery with Looker to have your billing data in a visualized manner, or integrate it with other machine laerning services for future insights.
 
 # Tutorial
 In this walk-throug we will complete our tasks using both the cloud shell and the console to achieve the following:
