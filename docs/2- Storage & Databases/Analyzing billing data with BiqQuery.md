@@ -82,6 +82,23 @@ WHERE Cost > 0
 **We will work now on a large public dataset constructing of over 20000 lines, made available by Google Cloud for experimental use cases such as our lab**
 
 4- On the query tab, paste the following in query editor to view the entire dataset
+```
+SELECT
+  product,
+  resource_type,
+  start_time,
+  end_time,
+  cost,
+  project_id,
+  project_name,
+  project_labels_key,
+  currency,
+  currency_conversion_rate,
+  usage_amount,
+  usage_unit
+FROM
+  `cloud-training-prod-bucket.arch_infra.billing_data`
+```
 
 ![Screenshot 2023-12-11 at 9 13 40 AM](https://github.com/a-elfateh/GCP/assets/61758821/50943f6c-a136-4a57-a3ed-b48fe0175cd7)
 
