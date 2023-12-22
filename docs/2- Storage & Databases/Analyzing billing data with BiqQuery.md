@@ -65,5 +65,7 @@ SELECT * FROM imported_billing_data.sampleinfotable WHERE Cost = 0
 **Switching to the BigQuery console, from the navigation menu in the top left side, enter the BigQuery console. There you will see all the datasets that you created**
 
 1- Press on the ```imported_billing_data``` dataset
-![eN+IBbcbRmSfTqyuy1wcIQ_thumb_4](https://github.com/a-elfateh/GCP/assets/61758821/ba9c6ea7-812d-4c4e-bd1a-54b96e9b8f68)
+
+![Screenshot 2023-12-11 at 9 12 56 AM](https://github.com/a-elfateh/GCP/assets/61758821/c8ead1f4-f8ae-4c66-8b9f-c8674a2e7036)
+
 
