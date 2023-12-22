@@ -30,11 +30,10 @@ wget https://github.com/a-elfateh/GCP/blob/main/resources/export-billing-example
 3- Create a table in the "imported_billing_data" dataset called "sampleinfotable" using the csv you just pulled
 ```
 bq load \
-    --skip_leading_rows=1 \
-    --autodetect \
-    --source_format=CSV \
-    imported_billing_data.sampleinfotable \
-    export-billing-example.csv
+--autodetect \
+--source_format=CSV \
+imported_billing_data.sampleinfotable \
+gs://cloud-training/archinfra/export-billing-example.csv
 ```
 
 4- Now let's check that the data has been ingested successfully through the ```show``` command
@@ -63,4 +62,8 @@ bq shell
 ```
 SELECT * FROM imported_billing_data.sampleinfotable WHERE Cost = 0
 ```
-**Switching to the BigQuery console**
+**Switching to the BigQuery console, from the navigation menu in the top left side, enter the BigQuery console. There you will see all the datasets that you created**
+
+1- Press on the ```imported_billing_data``` dataset
+![eN+IBbcbRmSfTqyuy1wcIQ_thumb_4](https://github.com/a-elfateh/GCP/assets/61758821/ba9c6ea7-812d-4c4e-bd1a-54b96e9b8f68)
+
