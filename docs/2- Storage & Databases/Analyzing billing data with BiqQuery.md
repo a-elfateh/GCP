@@ -64,8 +64,111 @@ SELECT * FROM imported_billing_data.sampleinfotable WHERE Cost = 0
 ```
 **Switching to the BigQuery console, from the navigation menu in the top left side, enter the BigQuery console. There you will see all the datasets that you created**
 
-1- Press on the ```imported_billing_data``` dataset
+1- Expand the ```imported_billing_data``` dataset to view the tables asscoicated with it, from there you will get to see the ```sampleinfotable``` we created using the shell. Click on the ```sampleinfotable```
+
+![Screenshot 2023-12-11 at 9 13 05 AM](https://github.com/a-elfateh/GCP/assets/61758821/8ca27e9d-7c3b-477f-b974-0ba3e2273d8f)
+
+
+2- Click on "DETAILS" to view the details of the ```sampleinfotable``` table. **Note that the "Table expiration" and the "Data location" is equal to what we did in the shell earlier**
 
 ![Screenshot 2023-12-11 at 9 12 56 AM](https://github.com/a-elfateh/GCP/assets/61758821/c8ead1f4-f8ae-4c66-8b9f-c8674a2e7036)
 
+3- Click on the plus sign next to the ```sampleinfotable``` opened tab to run some quiers on our dataset. Copy and paste the following query to view services that had 0 charges.
+```
+SELECT * FROM `imported_billing_data.sampleinfotable`
+WHERE Cost > 0
+```
 
+**We will work now on a large public dataset constructing of over 20000 lines, made available by Google Cloud for experimental use cases such as our lab**
+
+4- On the query tab, paste the following in query editor to view the entire dataset
+
+![Screenshot 2023-12-11 at 9 13 40 AM](https://github.com/a-elfateh/GCP/assets/61758821/50943f6c-a136-4a57-a3ed-b48fe0175cd7)
+
+**The output should look something like this**
+
+![Screenshot 2023-12-11 at 9 13 52 AM](https://github.com/a-elfateh/GCP/assets/61758821/cc2cec32-e41a-4baa-a3bc-e9ad341847cf)
+
+5- Now run the following query to find the latest 100 records where there were charges (cost > 0)
+```
+SELECT
+  product,
+  resource_type,
+  start_time,
+  end_time,
+  cost,
+  project_id,
+  project_name,
+  project_labels_key,
+  currency,
+  currency_conversion_rate,
+  usage_amount,
+  usage_unit
+FROM
+  `cloud-training-prod-bucket.arch_infra.billing_data`
+WHERE
+  Cost > 0
+ORDER BY end_time DESC
+LIMIT
+  100
+```
+
+6- After, run this query to find all charges that were more than 3 dollars
+```
+SELECT
+  product,
+  resource_type,
+  start_time,
+  end_time,
+  cost,
+  project_id,
+  project_name,
+  project_labels_key,
+  currency,
+  currency_conversion_rate,
+  usage_amount,
+  usage_unit
+FROM
+  `cloud-training-prod-bucket.arch_infra.billing_data`
+WHERE
+  cost > 3
+```
+
+7- Let's try to get the product with the most records in the billing data
+```
+SELECT
+  product,
+  COUNT(*) AS billing_records
+FROM
+  `cloud-training-prod-bucket.arch_infra.billing_data`
+GROUP BY
+  product
+ORDER BY billing_records DESC
+```
+
+8- Get the most frequently used product costing more than 1 dollar using this query
+```
+SELECT
+  product,
+  COUNT(*) AS billing_records
+FROM
+  `cloud-training-prod-bucket.arch_infra.billing_data`
+WHERE
+  cost > 1
+GROUP BY
+  product
+ORDER BY
+  billing_records DESC
+```
+9- Finally, let's try to find the product with the highest aggregate cost
+```
+SELECT
+  product,
+  ROUND(SUM(cost),2) AS total_cost
+FROM
+  `cloud-training-prod-bucket.arch_infra.billing_data`
+GROUP BY
+  product
+ORDER BY
+  total_cost DESC
+```
