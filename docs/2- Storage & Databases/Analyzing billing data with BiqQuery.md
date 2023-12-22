@@ -73,7 +73,7 @@ SELECT * FROM imported_billing_data.sampleinfotable WHERE Cost = 0
 
 ![Screenshot 2023-12-11 at 9 12 56 AM](https://github.com/a-elfateh/GCP/assets/61758821/c8ead1f4-f8ae-4c66-8b9f-c8674a2e7036)
 
-3- Click on the plus sign next to the ```sampleinfotable``` opened tab to run some quiers on our dataset. Copy and paste the following query to view services that had 0 charges. Press the bule button "Run" to run your query
+3- Click on the plus sign next to the ```sampleinfotable``` opened tab to run some quiers on our dataset. Copy and paste the following query to view services that had 0 charges. Press the blue button "Run" to run your query
 ```
 SELECT * FROM `imported_billing_data.sampleinfotable`
 WHERE Cost > 0
