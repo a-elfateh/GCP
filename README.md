@@ -5,7 +5,8 @@ I segregated this repo into sub-topics, with each topic containing related servi
 
 ## Topics:
 1. Networking
-   - [Private Google Access](https://github.com/a-elfateh/GCP/blob/main/docs/1-%20Networking/Private%20Google%20Access.md)
+   - [Configuring Private Google Access](https://github.com/a-elfateh/GCP/blob/main/docs/1-%20Networking/Private%20Google%20Access.md)
+   - [Configuring HA VPN](https://github.com/a-elfateh/GCP/blob/main/docs/1-%20Networking/HA%20VPN.md)
 2. Virtual Machines
    - [Minecraft Server](https://github.com/a-elfateh/GCP/blob/main/docs/3-%20Virutal%20Machines/Minecraft%20Server.md)
 3. Storage & Databases
