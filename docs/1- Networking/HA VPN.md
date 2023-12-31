@@ -12,7 +12,8 @@ In order to configure BGP routing, each end of the VPN tunnel must use a unique 
 
 # Tutorial
 
-![VLAXpKCCD3vR0NwjlabV3gVp9Zzf1PPu7D91KCm9VY4=](https://github.com/a-elfateh/Things/assets/61758821/ddf3eb81-c6f3-4721-a3c9-e0f2b3a00c96)
+<img width="745" alt="Screenshot 2023-12-31 at 9 32 39 AM" src="https://github.com/a-elfateh/GCP/assets/61758821/984dd255-d7bd-4dcd-be13-7d006f89d8cf">
+
 
 To apply what previously mentioned, In this tutorial we'll create a global VPC called ```vpc-demo```, with two custom subnets in us-east1 and us-central1. In this VPC, we'll add a Compute Engine instance in each region. Then create a second VPC called ```on-prem``` to simulate a customer's on-premises data center. In this second VPC, we'll add a subnet in region us-central1 and a Compute Engine instance running in this region. 
 
