@@ -6,6 +6,6 @@ echo $DNS_IP
 sudo chmod g+w /etc/systemd/resolved.conf
 sudo bash -c "echo -e 'DNS= $DNS_IP 169.254.169.254
 Domains= dns.local us-central1-f.c.dns-menkish.internal. c.dns-menkish.internal. google.internal.' >>         /etc/systemd/resolved.conf"
-sudo echo "supersede domain-name-servers $DNS_IP;" >> /etc/dhcp/dhclient.conf
+sudo bash -c  "echo 'supersede domain-name-servers $DNS_IP;' >> /etc/dhcp/dhclient.conf"
 sudo systemctl restart systemd-resolved
 sudo systemctl restart systemd-resolved && sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
