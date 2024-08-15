@@ -64,3 +64,17 @@ $REVERSE_IP_FIRST_OCTET      IN      PTR     ad1.dns.local.' > /etc/bind/db.10
 
 # Restart the BIND9 service to apply the changes
 sudo systemctl restart bind9"
+
+# Append the DNS server IP and domain information to the systemd resolved configuration file.
+sudo bash -c " echo 'DNS= $DNS_IP 169.254.169.254' >> /etc/systemd/resolved.conf && echo $(cat /etc/resolv.conf | awk '                                                                                                      /^domain/ { printf "dns.local " }
+    /^search/ { printf "%s\n", substr($0, index($0,$2)) }
+    /^nameserver/ { exit }') >> /etc/systemd/resolved.conf"
+
+# Append a configuration to the DHCP client to supersede the default DNS server with your DNS server IP.
+sudo bash -c "echo 'supersede domain-name-servers $DNS_IP;' >> /etc/dhcp/dhclient.conf"
+
+# Restart the systemd-resolved service to apply the new DNS settings.
+sudo systemctl restart systemd-resolved
+
+# Ensure /etc/resolv.conf is correctly linked to the systemd-resolved configuration.
+sudo systemctl restart systemd-resolved && sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
