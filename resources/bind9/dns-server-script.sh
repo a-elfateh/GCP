@@ -1,5 +1,5 @@
 # Update package lists and install BIND9 (DNS server) and dnsutils (DNS utilities)
-sudo apt update && sudo apt install -y bind9
+sudo apt update && sudo apt install -y bind9 && sudo apt install -y dnsutils
 
 # Capture the current machine's IP address into the DNS_IP variable
 DNS_IP=$(hostname -I | awk '{print $1}')
