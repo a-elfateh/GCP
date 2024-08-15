@@ -16,11 +16,7 @@ sudo chmod g+w /etc/systemd/resolved.conf
 
 # Append the DNS server IP and domain information to the systemd resolved configuration file.
 sudo bash -c "echo -e 'DNS= $DNS_IP 169.254.169.254
-Domains= $(cat /etc/resolv.conf | sed -n '
-  /^domain/ { s/^domain /dns.local /; p }
-  /^search/ { s/^search /dns.local /; p }
-'
-)' >> /etc/systemd/resolved.conf"
+Domains= dns.local us-central1-f.c.dns-menkish.internal. c.dns-menkish.internal. google.internal.' >> /etc/systemd/resolved.conf"
 
 # Append a configuration to the DHCP client to supersede the default DNS server with your DNS server IP.
 sudo bash -c "echo 'supersede domain-name-servers $DNS_IP;' >> /etc/dhcp/dhclient.conf"
