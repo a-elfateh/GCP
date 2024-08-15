@@ -1,9 +1,19 @@
+# Update package lists and install BIND9 (DNS server) and dnsutils (DNS utilities)
 sudo apt update && sudo apt install -y bind9
 
+# Capture the current machine's IP address into the DNS_IP variable
 DNS_IP=$(hostname -I | awk '{print $1}')
+
+# Get the IP address of the NGINX server by performing an nslookup and extracting the IP address
 NGINX_IP=$(nslookup nginx | awk '/^Address: / {print $2}' | tail -n1)
+
+# Generate the reverse IP address (for reverse DNS) by rearranging the first three octets of the DNS_IP
 REVERSE_IP=$(echo $DNS_IP | awk -F '.' '{print $3"."$2"."$1}')
+
+# Extract the first octet of the DNS_IP for use in reverse DNS configuration
 REVERSE_IP_FIRST_OCTET=$(echo $DNS_IP | awk -F '.' '{print $1}')
+
+# Create the BIND9 configuration files for DNS options and zones at /etc/bind/
 sudo bash -c "echo 'options {
         directory "'"/var/cache/bind"'";
 
@@ -50,4 +60,7 @@ nginx   IN      A       $NGINX_IP' > /etc/bind/db.dns.local && sudo echo -e ';
                          604800 )       ; Negative Cache TTL
 ;
 @       IN      NS      ad1.
-$REVERSE_IP_FIRST_OCTET      IN      PTR     ad1.dns.local.' > /etc/bind/db.10 && sudo systemctl restart bind9"
+$REVERSE_IP_FIRST_OCTET      IN      PTR     ad1.dns.local.' > /etc/bind/db.10 
+
+# Restart the BIND9 service to apply the changes
+sudo systemctl restart bind9"
