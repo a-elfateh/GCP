@@ -16,7 +16,7 @@ Host on **Compute Engine** if you need custom DNS configurations, advanced featu
 Use **Cloud DNS** if you prefer a managed service that integrates with GCP, requires less maintenance, and provides high scalability and reliability.
 
 # Setting up custome DNS server on Compute Engine:
-In this setup, we'll be configuring a DNS server using BIND9 on Google Cloud Platform. To validate the DNS configuration, we'll deploy an NGINX instance and add an A record that points to this NGINX server. This setup will allow us to ensure that DNS resolution is functioning correctly, making it a reliable solution for future projects.
+In this setup, we'll be configuring a DNS server using BIND9 on Google Cloud Platform. To validate the DNS configuration, we'll deploy an NGINX instance and add an A record that points to this NGINX server. This setup will allow us to ensure that DNS resolution is functioning correctly, making it a reliable solution for future projects. The name of our domain is going to be ```dns.local``` which we will later be using to check our configurations.
 
 I have already went and created ready scripts that do all needed configuration in both the DNS and NGINX servers.   
 
@@ -52,3 +52,49 @@ git clone https://github.com/a-elfateh/GCP/
 ```
 chmod +x ~/GCP/resources/bind9/nginx-server-script.sh
 ```
+
+7- Run your script
+```
+./GCP/resources/bind9/nginx-server-script.sh
+```
+
+8- To verify the previous, and to make sure that the script ran as needed, run ```cat /etc/resolv.conf```, the output should look something like this
+```
+dfsadjlfjsald;kfjasdlkfj
+```
+
+9- Exit from the machine and ssh into the dns server to set its configuration
+```
+gcloud compute ssh dns --zone ZONE
+```
+
+10- Install Git and clone the repo to the machine
+```
+sudo apt update && sudo apt install -y git
+git clone https://github.com/a-elfateh/GCP/
+```
+
+11- Change the permissions of the script and make it executable
+```
+chmod +x ~/GCP/resources/bind9/dns-server-script.sh
+```
+
+12- Run your script
+```
+./GCP/resources/bind9/dns-server-script.sh
+```
+
+**This script shall install the bind9 server, add all the needed configuration files under /etc/bind, and insure that the systemd-resolved service is configured to make our dns server run as we want it to. The script adds an A record into its config files to point to the NGINX server we created earlier**
+
+13- Now let's verify that everything went well by checking the bind9 service's status, and checking the content of the ```/etc/resolv.conf``` content
+```
+sudo systemctl status bind9
+cat /etc/resolv.conf
+```
+
+14- Finally, verify the zones configuration by doing a curl command of the NGINX server
+```
+curl nginx.dns.local
+```
+
+Alternativly, you can just do a ```curl nginx``` which should also work because the script we ran adds the value of the domain name ```dns.local``` to the systemd-resolved service.
