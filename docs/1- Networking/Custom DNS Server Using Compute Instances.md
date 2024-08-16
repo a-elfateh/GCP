@@ -68,7 +68,7 @@ search dns.local europe-west1-b.c.demo-dns.internal c.demo-dns.internal google.i
 
 9- Exit from the machine and ssh into the dns server to set its configuration
 ```
-gcloud compute ssh dns --zone ZONE
+gcloud compute ssh dns --zone $ZONE
 ```
 
 10- Install Git and clone the repo to the machine
