@@ -18,7 +18,8 @@ Use **Cloud DNS** if you prefer a managed service that integrates with GCP, requ
 # Setting up custome DNS server on Compute Engine:
 In this setup, we'll be configuring a DNS server using BIND9 on Google Cloud Platform. To validate the DNS configuration, we'll deploy an NGINX instance and add an A record that points to this NGINX server. This setup will allow us to ensure that DNS resolution is functioning correctly, making it a reliable solution for future projects. The name of our domain is going to be ```dns.local``` which we will later be using to check our configurations.
 
-I have already went and created ready scripts that do all needed configuration in both the DNS and NGINX servers.   
+I have already went and created ready scripts that do all needed configuration in both the DNS and NGINX servers.
+**Note: the following guideline assumes that all your firewall settings are at default, or you are allowing internal access for ssh/http/dns ports**
 
 ## Steps:
 1- Login to your GCP account and fire up cloud shell. Make sure that the Compute Engine API is enabled. If no run the following command to enable the api
