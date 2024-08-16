@@ -61,7 +61,9 @@ chmod +x ~/GCP/resources/bind9/nginx-server-script.sh
 
 8- To verify the previous, and to make sure that the script ran as needed, run ```cat /etc/resolv.conf```, the output should look something like this
 ```
-dfsadjlfjsald;kfjasdlkfj
+nameserver 10.132.0.3
+nameserver 169.254.169.254
+search dns.local europe-west1-b.c.demo-dns.internal c.demo-dns.internal google.internal
 ```
 
 9- Exit from the machine and ssh into the dns server to set its configuration
