@@ -29,7 +29,7 @@ gcloud services enable compute.googleapis.com
 
 2- Store a variable vlaue of the zone you want to create the DNS and NGINX server in
 ```
-export ZONE= ZONE_NAME
+export ZONE=ZONE_NAME
 ```
 
 3- Create 2 instances. One for the NGINX server and another one for the DNS server
