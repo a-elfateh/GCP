@@ -1,9 +1,12 @@
-#Hosting a DNS Server on a GCP Compute Instance:
+#Hosting a DNS Server on a GCP Compute Instance:#
 Hosting a DNS server on a Google Cloud Platform (GCP) Compute Engine instance versus using a private hosted zone in GCP’s Cloud DNS are two different approaches to managing DNS, each with its own advantages and use cases. Here’s a quick overview of considerations before choosing:
 
 **Control:** Hosting on a GCP Compute Instance provides full control and customization, while GCP’s Cloud DNS offers a managed service with less flexibility.
+
 **Maintenance:** Hosting your own DNS server requires more maintenance, whereas GCP’s Cloud DNS is maintained by Google.
+
 **Scalability and Reliability:** GCP Cloud DNS scales automatically and offers high reliability, while a self-hosted DNS server requires manual scaling and configuration for high availability.
+
 **Integration:** GCP Cloud DNS integrates seamlessly with other GCP services, making it easier to manage DNS in a GCP-centric environment.
 
 #When to Choose Each
