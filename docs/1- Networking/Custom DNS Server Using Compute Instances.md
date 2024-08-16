@@ -51,7 +51,7 @@ git clone https://github.com/a-elfateh/GCP/
 
 6- Change the permissions of the script and make it executable
 ```
-chmod +x ~/GCP/resources/bind9/nginx-server-script.sh
+chmod +x ./GCP/resources/bind9/nginx-server-script.sh
 ```
 
 7- Run your script
@@ -79,7 +79,7 @@ git clone https://github.com/a-elfateh/GCP/
 
 11- Change the permissions of the script and make it executable
 ```
-chmod +x ~/GCP/resources/bind9/dns-server-script.sh
+chmod +x ./GCP/resources/bind9/dns-server-script.sh
 ```
 
 12- Run your script
